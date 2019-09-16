@@ -13,8 +13,7 @@ class Tenor(object):
         params['key'] = self.api_key
         params['limit'] = self.limit
         url = self.url_base+'search?'+parse.urlencode(params)
-        endpoint = ''.join(url)
-        res = requests.get(self.url)
+        res = requests.get(url)
         if res.status_code == 200:
             return json.loads(res.content)
         return res.status_code
