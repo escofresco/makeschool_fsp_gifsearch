@@ -4,9 +4,16 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
-            data: $(this).find('input[name="search_input"]'),
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                    'partial_search':$(this).find('input[name="search_input"]').val()
+            }),
             success: function(data) {
-                showGifs(data);
+                if (data.length > 0) {
+                    showGifs(data);
+                } else {
+                    showNoGifs();
+                }
             },
             error: function(data) {
                 console.log('Oh no!!!');
@@ -20,11 +27,15 @@ $(document).ready(function() {
             columnContent += `<div class="row">
                                 <div class="col-6">
                                     <div class="card" style="width: 18rem;">
-                                      <video src="${elm['media'][0]['mp4']['url']}" class="card-img-top" alt="${elm['title']}">
+                                      <img src="${elm['media'][0]['gif']['url']}" class="card-img-top" alt="${elm['title']}">
                                     </div>
                                 </div>
                              </div>`
         });
         $('#gif-column').html(columnContent);
+    }
+
+    function showNoGifs() {
+        $('#gif-column').html()
     }
 });
