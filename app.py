@@ -1,7 +1,8 @@
 from flask import (Flask,
                    jsonify,
                    render_template,
-                   request,)
+                   request,
+                   url_for,)
 
 from tenor import Tenor
 
@@ -10,15 +11,15 @@ app = Flask(__name__, static_url_path='/static') # https://stackoverflow.com/que
 
 @app.route('/')
 def index():
-    return render_template('index.html',
-                           test_results=Tenor().search(q='big',
-                                                       contentfilter='high')['results'])
+    return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
 def search():
-    partial_search = request.args.get('search_input')
-    return jsonify(Tenor().search(q=partial_search,
-                                  contentfilter='high')['results'])
+    if request.method == 'POST':
+        partial_search = request.json['partial_search']
+        return jsonify(Tenor().search(q=partial_search,
+                                      contentfilter='high')['results'])
+    return url_for(index)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost", port=8000, debug=True)
