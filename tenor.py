@@ -10,9 +10,16 @@ class Tenor(object):
         self.url_base = 'https://api.tenor.com/v1/'
 
     def search(self, **params):
+        return self.make_request('search', params)
+
+
+    def autocomplete(self, **params):
+        return self.make_request('autocomplete', params)
+
+    def make_request(self, route, params):
         params['key'] = self.api_key
         params['limit'] = self.limit
-        url = self.url_base+'search?'+parse.urlencode(params)
+        url = f'{self.url_base}{route}?{parse.urlencode(params)}'
         res = requests.get(url)
         if res.status_code == 200:
             return json.loads(res.content)
