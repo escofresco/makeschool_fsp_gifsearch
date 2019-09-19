@@ -17,8 +17,8 @@ def index():
 def autocomplete():
     if request.method == 'POST':
         partial_search = request.json['partial_search']
-        return jsonify(Tenor().autocomplete(q=partial_search)['resultss'])
-    return url_for('index')
+        return jsonify(Tenor().autocomplete(q=partial_search)['results'])
+    return render_template(url_for('index'))
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -26,7 +26,7 @@ def search():
         partial_search = request.json['partial_search']
         return jsonify(Tenor().search(q=partial_search,
                                       contentfilter='high')['results'])
-    return url_for('index')
+    return render_template(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host="localhost", port=8000, debug=True)
