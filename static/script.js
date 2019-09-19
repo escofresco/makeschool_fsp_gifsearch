@@ -53,19 +53,18 @@ $(document).ready(function() {
         searchDropdownElm.html('');
         data.forEach(function(elm, idx) {
             var elmId = `item-${idx}-${elm}`
-            searchDropdownElm.append(`<a
-                                        class="dropdown-item"
+            searchDropdownElm.append(`<option
                                         id="${elmId}"
-                                        href="#">${elm}</a>`);
+                                        value="${elm}">`);
         });
-        searchDropdownElm.addClass('show');
+        //searchDropdownElm.addClass('show');
         data.forEach(function(elm, idx) {
             $(`#item-${idx}-${elm}`).click(suggestionDropdownItemClickHandler);
         });
     }
 
     function hideSuggestionMenu() {
-        searchDropdownElm.removeClass('show');
+        //searchDropdownElm.removeClass('show');
         searchDropdownElm.html('');
     }
 
