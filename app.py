@@ -16,8 +16,8 @@ with open('quotes.json') as quotes:
 def index():
     return render_template('index.html')
 
-@app.route('/random_error_messages')
-def random_error_messages():
+@app.route('/random_quote')
+def random_quote():
     if request.method == 'POST':
         random_author = choice(random_quotes_authors)
         return jsonify({
