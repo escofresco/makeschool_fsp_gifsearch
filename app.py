@@ -3,12 +3,13 @@ from flask import (Flask,
                    render_template,
                    request,
                    url_for,)
+import json
 from random import choice
 from tenor import Tenor
 
 app = Flask(__name__, static_url_path='/static') # https://stackoverflow.com/questions/20646822/how-to-serve-static-files-in-flask
 
-with open('quotes.json') as quotes:
+with open('static/quotes.json') as quotes:
     random_quotes_json = json.load(quotes)
     random_quotes_authors = list(random_quotes_json.keys())
 
@@ -16,7 +17,7 @@ with open('quotes.json') as quotes:
 def index():
     return render_template('index.html')
 
-@app.route('/random_quote')
+@app.route('/random_quote', methods=['POST'])
 def random_quote():
     if request.method == 'POST':
         random_author = choice(random_quotes_authors)
