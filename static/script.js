@@ -83,6 +83,17 @@ $(document).ready(function() {
     }
 
     function showNoGifs() {
-        $('#gif-column').html()
+        $.ajax({
+            type: 'POST',
+            url: '/random_quote',
+            contentType: 'application/json;charset=UTF-8',
+            data: '',
+            success: function(data) {
+                $('#gif-column').html(`<blockquote class="blockquote text-right">
+                <p class="mb-0">${data['quote']}</p>
+                <footer class="blockquote-footer">${data['author']}</footer>
+                </blockquote>`);
+            },
+        });
     }
 });
