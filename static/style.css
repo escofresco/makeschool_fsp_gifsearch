@@ -1,9 +1,13 @@
-html, body {
-    height: 100%;
+
+body, nav {
+    background:
+    linear-gradient(135deg, #ECEDDC 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, #ECEDDC 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, #ECEDDC 25%, transparent 25%),
+    linear-gradient(45deg, #ECEDDC 25%, transparent 25%) !important;
+    background-size: 100px 100px !important;
+    background-color: #31abf7 !important;
+
 }
 
-body {
-    background: rgb(0,221,255);
-    background: linear-gradient(180deg, rgba(0,221,255,1) 0%, rgba(249,254,255,1) 99%);
-
-}
+/* https://cssgradient.io/blog/gradient-patterns/
