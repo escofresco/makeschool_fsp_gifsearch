@@ -1,10 +1,12 @@
+from dotenv import load_dotenv
 import json
+import os
 import requests
 from urllib import parse
-
+load_dotenv()
 class Tenor(object):
 
-    def __init__(self, api_key='QA245EMO57HT', limit=10):
+    def __init__(self, api_key=os.getenv("TENOR_API_KEY"), limit=10):
         self.api_key = api_key
         self.limit = limit
         self.url_base = 'https://api.tenor.com/v1/'
